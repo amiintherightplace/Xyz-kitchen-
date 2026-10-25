@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>XYZ Kitchen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff7f0;--surf:#fff;--ink:#241410;--mute:#80584a;--line:#f3dccd;--org:#ff5a1f;--org2:#ffb81c;--orgd:#c53b0a;--bink:#241410;--deep:#2a120a;--dink:#ffe9db;--veg:#1b9a4b;--non:#c4302b;--hot:#c4302b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a0c07;--surf:#281410;--ink:#ffece0;--mute:#cfa790;--line:#432419;--orgd:#ff8a5c;--deep:#0f0604;--veg:#3ccf74;--non:#ef5a52;--hot:#ff7a6b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1a0c07;--surf:#281410;--ink:#ffece0;--mute:#cfa790;--line:#432419;--orgd:#ff8a5c;--deep:#0f0604;--veg:#3ccf74;--non:#ef5a52;--hot:#ff7a6b;color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+html{scroll-padding-top:calc(100px + env(safe-area-inset-top,0px));height:100%}
+body{font:400 16px/1.55 'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--org);z-index:30}
+h1,h2,h3,h4{font-family:'Bricolage Grotesque','DM Sans',sans-serif;line-height:1.1}
+button{font:inherit;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--bink);box-shadow:0 0 0 6px var(--org2)}
+.wrap{max-width:1000px;margin:auto;padding:0 18px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--org);color:var(--bink);border-bottom:2px solid rgba(36,20,16,.15)}
+.hw{display:flex;align-items:center;justify-content:space-between;gap:6px 20px;flex-wrap:wrap;padding:10px 18px 4px;max-width:1000px;margin:auto}
+.logo{font:800 1.45rem 'Bricolage Grotesque',sans-serif;text-decoration:none}
+nav{display:flex;gap:22px;overflow-x:auto;width:100%;font-weight:700}
+nav a{text-decoration:none;white-space:nowrap;padding:6px 0 4px;border-bottom:3px solid transparent}
+nav a[aria-current=page]{border-color:var(--bink)}
+@media(min-width:720px){nav{width:auto}.hw{padding-bottom:10px}}
+.page[hidden]{display:none}
+.hero{background:var(--deep);color:var(--dink);padding:46px 0 56px}
+.hg{display:grid;gap:40px;align-items:center}
+@media(min-width:760px){.hg{grid-template-columns:1.25fr .75fr}}
+.hero h1{font-weight:800;font-size:clamp(2.6rem,10vw,4.8rem);letter-spacing:-.02em;max-width:11ch}
+.hero p{max-width:46ch;margin:14px 0 22px;font-size:1.08rem;opacity:.88}
+.plate{--r:92px;position:relative;width:calc(var(--r)*2 + 84px);aspect-ratio:1;border-radius:50%;background:var(--org2);margin:0 auto;display:grid;place-items:center;box-shadow:0 0 0 10px rgba(255,184,28,.22)}
+.plate b{font-size:4.2rem;line-height:1}
+.plate span{position:absolute;top:50%;left:50%;width:2.7rem;height:2.7rem;margin:-1.35rem 0 0 -1.35rem;display:grid;place-items:center;font-size:1.8rem;background:#fff4ea;border-radius:50%;transform:rotate(var(--a)) translateX(var(--r)) rotate(calc(var(--a)*-1))}
+.ph{background:var(--org);color:var(--bink);padding:34px 0 38px}
+.ph h1{font-weight:800;font-size:clamp(2.2rem,8vw,3.6rem);letter-spacing:-.01em}
+.ph p{max-width:48ch;margin-top:12px;font-size:1.08rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip,.tab{border:1.5px solid currentColor;background:none;color:var(--ink);border-radius:99px;padding:7px 14px;font-weight:500}
+.chip.on,.tab.on{background:var(--org);border-color:var(--org);color:var(--bink);font-weight:700}
+.hero .chip{color:var(--dink);border-color:rgba(255,233,219,.55)}
+.hero .chip.on{border-color:var(--org);color:var(--bink)}
+.cta{display:inline-block;margin-top:24px;background:var(--org);color:var(--bink);font-weight:700;padding:12px 22px;border-radius:10px;text-decoration:none}
+section{padding:46px 0}
+h2{font-weight:800;font-size:clamp(1.8rem,6vw,2.6rem);letter-spacing:-.01em;margin-bottom:8px}
+.sub{color:var(--mute);max-width:56ch}
+.bar{display:flex;flex-direction:column;gap:12px;margin:6px 0 10px}
+#tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.tab{white-space:nowrap}
+#q{width:100%;padding:11px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--surf);color:var(--ink);font:inherit}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;color:var(--mute);font-size:.9rem;align-items:center}
+.dot{width:14px;height:14px;border:2px solid currentColor;border-radius:3px;display:inline-block;position:relative;flex:none;align-self:center}
+.dot::after{content:"";position:absolute;inset:2px;border-radius:50%;background:currentColor}
+.dot.v{color:var(--veg)}.dot.n{color:var(--non)}
+.ch{font-size:1.6rem;margin:36px 0 4px;display:flex;align-items:baseline;gap:10px;border-left:6px solid var(--org);padding-left:12px}
+.ch span{font:400 .9rem 'DM Sans',sans-serif;color:var(--mute)}
+.list{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr));column-gap:44px}
+.row{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.em{flex:none;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:1.7rem;background:color-mix(in srgb,var(--org) 14%,var(--surf))}
+.mid{flex:1;min-width:0}
+.top{display:flex;align-items:baseline;gap:8px}
+.top h4{font-size:1.1rem;font-weight:800}
+.top b{color:var(--orgd);white-space:nowrap}
+.lead{flex:1;border-bottom:2px dotted var(--org);transform:translateY(-4px);min-width:12px}
+.mid p{color:var(--mute);font-size:.95rem;margin:2px 0 6px}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:.82rem;font-weight:700;border-radius:6px;padding:2px 8px}
+.tag.best{background:var(--org2);color:var(--bink)}
+.tag.spicy{background:color-mix(in srgb,var(--hot) 16%,transparent);color:var(--hot)}
+.tag.new{background:color-mix(in srgb,var(--veg) 16%,transparent);color:var(--veg)}
+.empty{padding:30px 0;color:var(--mute)}
+.deep{background:var(--deep);color:var(--dink)}
+.deep h2{color:var(--org2)}
+.grid2{display:grid;gap:34px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.facts h4{font-size:1.15rem;margin:18px 0 4px}
+.key{display:grid;gap:12px;margin-top:18px}
+.key div{display:flex;gap:12px;align-items:baseline}
+.hours{width:100%;border-collapse:collapse}
+.hours td{padding:9px 0;border-bottom:1px dotted rgba(255,233,219,.35)}
+.hours td:last-child{text-align:right;font-weight:700}
+.cards{display:grid;gap:12px;margin-top:16px}
+.card{display:block;padding:16px 18px;border:1.5px solid var(--line);border-radius:14px;background:var(--surf);text-decoration:none}
+a.card:hover{border-color:var(--org)}
+.card small{display:block;color:var(--mute)}
+.card strong{font:800 1.3rem 'Bricolage Grotesque',sans-serif;color:var(--orgd);overflow-wrap:anywhere}
+footer{background:var(--deep);color:var(--dink);padding:26px 0;font-size:.92rem;border-top:4px solid var(--org)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:space-between}
+footer a{margin-right:16px}
+</style>
+</head>
+<body>
+<header>
+  <div class="hw">
+    <a class="logo" href="#home" data-go="home">🍜 XYZ Kitchen</a>
+    <nav aria-label="Pages"><a href="#home" data-go="home">Home</a><a href="#menu" data-go="menu">Menu</a><a href="#about" data-go="about">About</a><a href="#contact" data-go="contact">Contact</a></nav>
+  </div>
+</header>
+
+<main>
+  <div class="page" id="p-home">
+    <div class="hero"><div class="wrap hg">
+      <div>
+        <h1>Hot food, clearly labelled.</h1>
+        <p>Every dish at XYZ Kitchen shows what is in it and how hot it is. Tap a label to filter the menu.</p>
+        <div class="chips" aria-label="Filter menu by label"></div>
+        <a class="cta" href="#menu" data-go="menu">See the full menu</a>
+      </div>
+      <div class="plate" aria-hidden="true"><b>🍜</b><span style="--a:0deg">🥟</span><span style="--a:60deg">🍕</span><span style="--a:120deg">🍔</span><span style="--a:180deg">🍫</span><span style="--a:240deg">🥭</span><span style="--a:300deg">🍛</span></div>
+    </div></div>
+    <section><div class="wrap">
+      <h2>Customer favourites</h2>
+      <p class="sub">The dishes people order most.</p>
+      <ul class="list" id="favs"></ul>
+      <a class="cta" href="#menu" data-go="menu">View all dishes</a>
+    </div></section>
+    <section class="deep"><div class="wrap grid2">
+      <div><h2>Come hungry</h2><p>Walk in and order at the counter, or call ahead and we will have it ready. Everything is cooked when you order it.</p><a class="cta" href="#contact" data-go="contact">Find us</a></div>
+      <table class="hours"><tr><td>Monday to Friday</td><td>10:00 to 21:00</td></tr><tr><td>Saturday</td><td>09:00 to 22:00</td></tr><tr><td>Sunday</td><td>09:00 to 20:00</td></tr></table>
+    </div></section>
+  </div>
+
+  <div class="page" id="p-menu" hidden>
+    <div class="ph"><div class="wrap"><h1>Menu</h1><p>Every dish in one place. Prices are per plate.</p></div></div>
+    <section style="padding-top:26px"><div class="wrap">
+      <div class="bar">
+        <div id="tabs" role="tablist"></div>
+        <input id="q" type="search" placeholder="Search dishes, for example momo" aria-label="Search dishes">
+        <div class="chips bar-chips"></div>
+        <div class="legend"><span><i class="dot v"></i> Vegetarian</span><span><i class="dot n"></i> Non-vegetarian</span><span>Please tell us about any allergies when you order.</span></div>
+      </div>
+      <div id="menuOut"></div>
+    </div></section>
+  </div>
+
+  <div class="page" id="p-about" hidden>
+    <div class="ph"><div class="wrap"><h1>About us</h1><p>A small kitchen that tells you exactly what you are eating.</p></div></div>
+    <section><div class="wrap grid2">
+      <div class="facts">
+        <h2>Made in front of you</h2>
+        <p>XYZ Kitchen is a sample food business. This site shows how a restaurant can present its menu and labels clearly.</p>
+        <h4>Fresh every morning</h4><p>Vegetables, dough and sauces are prepared daily.</p>
+        <h4>Honest labels</h4><p>Every dish carries its diet and heat level, so nobody has to ask.</p>
+        <h4>Dine in or take away</h4><p>Order at the counter, or call ahead and collect.</p>
+      </div>
+      <div class="facts">
+        <h2>Reading the menu</h2>
+        <p>These labels appear next to each dish.</p>
+        <div class="key">
+          <div><i class="dot v"></i><span>Vegetarian. No meat, fish or egg.</span></div>
+          <div><i class="dot n"></i><span>Non-vegetarian. Contains meat.</span></div>
+          <div><span class="tag spicy">🌶 Spicy</span><span>Noticeable heat. Ask for it milder.</span></div>
+          <div><span class="tag best">★ Bestseller</span><span>Most ordered this month.</span></div>
+          <div><span class="tag new">✦ New</span><span>Added in the last few weeks.</span></div>
+        </div>
+      </div>
+    </div></section>
+  </div>
+
+  <div class="page" id="p-contact" hidden>
+    <div class="ph"><div class="wrap"><h1>Contact</h1><p>Call or email us for questions, feedback or catering.</p></div></div>
+    <section><div class="wrap grid2">
+      <div>
+        <h2>Find us</h2>
+        <div class="cards">
+          <a class="card" href="tel:0000000000"><small>Phone</small><strong>000 000 0000</strong></a>
+          <a class="card" href="mailto:hello@xyz.example"><small>Email</small><strong>hello@xyz.example</strong></a>
+          <div class="card"><small>Address</small><strong>123 Example Street, Your City</strong></div>
+        </div>
+      </div>
+      <div class="deep" style="padding:26px;border-radius:16px;align-self:start">
+        <h2>Opening hours</h2>
+        <table class="hours"><tr><td>Monday to Friday</td><td>10:00 to 21:00</td></tr><tr><td>Saturday</td><td>09:00 to 22:00</td></tr><tr><td>Sunday</td><td>09:00 to 20:00</td></tr></table>
+      </div>
+    </div></section>
+  </div>
+</main>
+
+<footer><div class="wrap">
+  <span>© 2026 XYZ Kitchen. A sample website.</span>
+  <span><a href="#home" data-go="home">Home</a><a href="#menu" data-go="menu">Menu</a><a href="#about" data-go="about">About</a><a href="#contact" data-go="contact">Contact</a></span>
+</div></footer>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const PG=['home','menu','about','contact'];
+const F=[['veg','🟢 Vegetarian'],['spicy','🌶 Spicy'],['best','★ Bestsellers'],['new','✦ New']];
+const C=[['all','All'],['s','Starters'],['m','Mains'],['b','Burgers & Pizza'],['d','Desserts'],['k','Drinks']];
+const TL={best:'★ Bestseller',spicy:'🌶 Spicy',new:'✦ New'};
+const M=[
+['s','🥟','Chicken Momo','Hand-folded and steamed, with tomato achar',220,'n','best'],
+['s','🥬','Veg Momo','Cabbage, carrot and paneer filling',180,'v',''],
+['s','🌯','Crispy Spring Rolls','Vegetable rolls with sweet chilli dip',160,'v',''],
+['s','🍗','Chilli Chicken','Wok-tossed with capsicum and green chilli',290,'n','spicy'],
+['m','🍛','Butter Chicken Bowl','Creamy tomato gravy over jeera rice',420,'n',''],
+['m','🧀','Paneer Tikka Masala','Charred paneer in a smoky onion gravy',380,'v','best'],
+['m','🍚','Veg Fried Rice','Egg-free, with spring onion and soy',240,'v',''],
+['m','🍜','Chicken Thukpa','Hot noodle soup finished with chilli oil',280,'n','spicy new'],
+['b','🍔','Classic Chicken Burger','Crispy fillet, cheese and house sauce',320,'n',''],
+['b','🍔','Crispy Veg Burger','Potato and corn patty with lettuce and mayo',260,'v',''],
+['b','🍕','Margherita Pizza','Tomato, mozzarella and basil',450,'v','best'],
+['b','🍕','BBQ Chicken Pizza','Smoked chicken, onion and BBQ glaze',580,'n','new'],
+['d','🍫','Chocolate Lava Cake','Warm centre with a scoop of vanilla',220,'v','best'],
+['d','🍯','Gulab Jamun','Two pieces in cardamom syrup',120,'v',''],
+['d','🍨','Brownie Sundae','Brownie, ice cream and chocolate sauce',260,'v','new'],
+['k','🥭','Mango Lassi','Thick yoghurt and ripe mango',150,'v',''],
+['k','🍋','Iced Lemon Tea','Black tea with lemon and mint',110,'v',''],
+['k','☕','Cold Coffee','Blended with ice cream',190,'v','best'],
+['k','🫖','Masala Chai','Ginger and cardamom, served hot',70,'v','']
+];
+const items=M.map((a,i)=>({i,c:a[0],e:a[1],n:a[2],t:a[3],p:a[4],d:a[5],g:a[6].split(' ').filter(Boolean)}));
+let st={cat:'all',fl:new Set(),q:''};
+const rs=n=>'Rs. '+n.toLocaleString('en-IN');
+
+function route(){
+  let p=(location.hash||'').slice(1);
+  if(!PG.includes(p))p='home';
+  $$('.page').forEach(s=>s.hidden=s.id!=='p-'+p);
+  $$('nav a').forEach(a=>a.setAttribute('aria-current',a.dataset.go===p?'page':'false'));
+  scrollTo(0,0);
+}
+function go(p){try{if(location.hash!=='#'+p)location.hash=p}catch(e){}route()}
+addEventListener('hashchange',route);
+
+function row(m){
+  return `<li class="row"><span class="em">${m.e}</span><div class="mid"><div class="top"><i class="dot ${m.d}" title="${m.d==='v'?'Vegetarian':'Non-vegetarian'}"></i><h4>${m.n}</h4><span class="lead"></span><b>${rs(m.p)}</b></div><p>${m.t}</p><div class="tags">${m.g.map(x=>`<span class="tag ${x}">${TL[x]}</span>`).join('')}</div></div></li>`;
+}
+function match(m){
+  for(const f of st.fl){if(f==='veg'?m.d!=='v':!m.g.includes(f))return false}
+  return (m.n+' '+m.t).toLowerCase().includes(st.q);
+}
+function draw(){
+  $$('.chips').forEach(el=>el.innerHTML=F.map(([k,l])=>`<button class="chip${st.fl.has(k)?' on':''}" data-f="${k}" aria-pressed="${st.fl.has(k)}">${l}</button>`).join(''));
+  $('#tabs').innerHTML=C.map(([k,l])=>`<button class="tab${st.cat===k?' on':''}" data-c="${k}" role="tab" aria-selected="${st.cat===k}">${l}</button>`).join('');
+  let h='';
+  C.slice(1).forEach(([k,n])=>{
+    if(st.cat!=='all'&&st.cat!==k)return;
+    const it=items.filter(m=>m.c===k&&match(m));
+    if(it.length)h+=`<h3 class="ch">${n}<span>${it.length} ${it.length===1?'dish':'dishes'}</span></h3><ul class="list">${it.map(row).join('')}</ul>`;
+  });
+  $('#menuOut').innerHTML=h||'<p class="empty">No dishes match these filters. Clear a label or search for something else.</p>';
+  $('#favs').innerHTML=items.filter(m=>m.g.includes('best')).map(row).join('');
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-go],[data-f],[data-c]');
+  if(!b)return;
+  if(b.dataset.go){e.preventDefault();go(b.dataset.go)}
+  else if(b.dataset.f){
+    const k=b.dataset.f,hero=!!b.closest('.hero');
+    if(hero)st.fl.add(k);else st.fl.has(k)?st.fl.delete(k):st.fl.add(k);
+    draw();
+    if(hero)go('menu');
+  }else{st.cat=b.dataset.c;draw()}
+});
+$('#q').addEventListener('input',e=>{st.q=e.target.value.trim().toLowerCase();draw()});
+draw();route();
+</script>
+</body>
+</html>
